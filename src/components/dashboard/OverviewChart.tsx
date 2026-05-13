@@ -23,11 +23,11 @@ export function OverviewChart({ data }: Props) {
   if (data.every(d => d.income === 0 && d.expense === 0)) {
     return (
       <Card className="border-border/50">
-        <CardHeader>
-          <CardTitle className="text-sm font-medium">Visão geral — últimos 6 meses</CardTitle>
+        <CardHeader className="px-6 pt-5 pb-2">
+          <CardTitle className="text-base font-sans font-semibold">Visão geral — últimos 6 meses</CardTitle>
         </CardHeader>
-        <CardContent className="flex items-center justify-center h-40 text-muted-foreground text-sm">
-          Nenhuma transação ainda.
+        <CardContent className="flex items-center justify-center h-48 text-muted-foreground">
+          <p className="font-sans text-base">Nenhuma transação ainda.</p>
         </CardContent>
       </Card>
     )

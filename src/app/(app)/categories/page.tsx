@@ -26,8 +26,8 @@ export default function CategoriesPage() {
     <div className="space-y-4 max-w-4xl mx-auto">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h2 className="text-lg font-semibold">Categorias</h2>
-          <p className="text-sm text-muted-foreground">{categories.length} categoria(s)</p>
+          <h2 className="text-2xl font-bold font-sans tracking-tight">Categorias</h2>
+          <p className="text-base font-sans text-muted-foreground">{categories.length} categoria(s)</p>
         </div>
         <Button size="sm" className="gap-1.5" onClick={() => setShowForm(true)}>
           <Plus className="h-4 w-4" />

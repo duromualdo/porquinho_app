@@ -15,9 +15,17 @@ export async function getCategories() {
     .from('categories')
     .select('*')
     .eq('user_id', user.id)
-    .order('name')
+    .order('created_at', { ascending: true })
 
-  return data ?? []
+  if (!data) return []
+
+  // Deduplicate by name — keeps only the first occurrence of each name
+  const seen = new Set<string>()
+  return data.filter(c => {
+    if (seen.has(c.name)) return false
+    seen.add(c.name)
+    return true
+  })
 }
 
 export async function seedDefaultCategories() {
@@ -25,15 +33,18 @@ export async function seedDefaultCategories() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return
 
-  const { count } = await supabase
+  const { data: existing } = await supabase
     .from('categories')
-    .select('*', { count: 'exact', head: true })
+    .select('name')
     .eq('user_id', user.id)
 
-  if ((count ?? 0) > 0) return
+  const existingNames = new Set((existing ?? []).map(c => c.name))
+  const toInsert = DEFAULT_CATEGORIES.filter(c => !existingNames.has(c.name))
+
+  if (toInsert.length === 0) return
 
   await supabase.from('categories').insert(
-    DEFAULT_CATEGORIES.map(c => ({ ...c, user_id: user.id }))
+    toInsert.map(c => ({ ...c, user_id: user.id }))
   )
 }
 

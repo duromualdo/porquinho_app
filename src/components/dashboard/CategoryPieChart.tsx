@@ -19,11 +19,11 @@ export function CategoryPieChart({ data, currency = 'BRL' }: Props) {
   if (data.length === 0) {
     return (
       <Card className="border-border/50">
-        <CardHeader>
-          <CardTitle className="text-sm font-medium">Despesas por categoria (mês atual)</CardTitle>
+        <CardHeader className="px-6 pt-5 pb-2">
+          <CardTitle className="text-base font-sans font-semibold">Despesas por categoria (mês atual)</CardTitle>
         </CardHeader>
-        <CardContent className="flex items-center justify-center h-40 text-muted-foreground text-sm">
-          Nenhuma despesa este mês.
+        <CardContent className="flex items-center justify-center h-48 text-muted-foreground">
+          <p className="font-sans text-base">Nenhuma despesa este mês.</p>
         </CardContent>
       </Card>
     )

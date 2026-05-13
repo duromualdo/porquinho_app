@@ -15,9 +15,9 @@ export function TopBar() {
   const title = Object.entries(pageTitles).find(([k]) => pathname.startsWith(k))?.[1] ?? 'Porquinho'
 
   return (
-    <header className="h-14 border-b border-border flex items-center px-4 gap-3 bg-background/80 backdrop-blur-sm sticky top-0 z-10">
+    <header className="h-16 border-b border-border flex items-center px-6 gap-3 bg-background/80 backdrop-blur-sm sticky top-0 z-10">
       <Menu className="h-5 w-5 text-muted-foreground md:hidden" />
-      <h1 className="text-base font-semibold tracking-tight">{title}</h1>
+      <h1 className="text-xl font-bold tracking-tight font-sans">{title}</h1>
     </header>
   )
 }

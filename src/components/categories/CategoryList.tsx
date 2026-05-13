@@ -48,6 +48,7 @@ export function CategoryList({ categories }: Props) {
           <p className="text-muted-foreground text-sm">Nenhuma categoria criada.</p>
         </div>
         <CategoryForm open={!!editCat} onClose={() => setEditCat(null)} category={editCat} />
+
       </>
     )
   }
@@ -100,6 +101,7 @@ export function CategoryList({ categories }: Props) {
       </div>
 
       <CategoryForm open={!!editCat} onClose={() => setEditCat(null)} category={editCat} />
+
 
       <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
         <AlertDialogContent>

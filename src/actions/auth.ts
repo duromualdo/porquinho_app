@@ -20,6 +20,9 @@ export async function signIn(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(parsed.data)
 
   if (error) {
+    if (error.message.toLowerCase().includes('email not confirmed')) {
+      return { error: 'Confirme seu email antes de fazer login. Verifique sua caixa de entrada.' }
+    }
     return { error: 'Email ou senha inválidos.' }
   }
 
@@ -40,7 +43,7 @@ export async function signUp(formData: FormData) {
     return { error: parsed.error.issues[0].message }
   }
 
-  const { error } = await supabase.auth.signUp({
+  const { data: signUpData, error } = await supabase.auth.signUp({
     email:    parsed.data.email,
     password: parsed.data.password,
     options:  { data: { full_name: parsed.data.full_name } },
@@ -48,6 +51,11 @@ export async function signUp(formData: FormData) {
 
   if (error) {
     return { error: error.message }
+  }
+
+  // Se email confirmation está ativo, a sessão não é criada automaticamente
+  if (!signUpData.session) {
+    return { error: 'Conta criada! Confirme seu email para fazer login.' }
   }
 
   revalidatePath('/', 'layout')

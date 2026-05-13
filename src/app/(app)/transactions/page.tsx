@@ -37,8 +37,8 @@ function TransactionsContent() {
     <div className="space-y-4 max-w-5xl mx-auto">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div>
-          <h2 className="text-lg font-semibold">Transações</h2>
-          <p className="text-sm text-muted-foreground">{transactions.length} registro(s)</p>
+          <h2 className="text-2xl font-bold font-sans tracking-tight">Transações</h2>
+          <p className="text-base font-sans text-muted-foreground">{transactions.length} registro(s)</p>
         </div>
         <Button size="sm" className="gap-1.5" onClick={() => setShowForm(true)}>
           <Plus className="h-4 w-4" />
